@@ -2,8 +2,8 @@
     <x-honeycomb-float>
         <x-hero-section></x-hero-section>
         <x-sections.about></x-sections.about>
-        {{-- <x-services-section></x-services-section>
-        <x-portfolio :projects="$projects"></x-portfolio>
+        <x-sections.services></x-sections.services>
+        {{-- <x-portfolio :projects="$projects"></x-portfolio>
         <x-process-section></x-process-section>
         <x-call-to-action></x-call-to-action> --}}
     </x-honeycomb-float>

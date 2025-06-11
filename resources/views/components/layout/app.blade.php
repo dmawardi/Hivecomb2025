@@ -27,5 +27,7 @@
     </main>
     @include('components.layout._footer')
     @stack('scripts')
+    <script src="https://kit.fontawesome.com/821bfa308a.js" crossorigin="anonymous"></script>
+
 </body>
 </html>
