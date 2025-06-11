@@ -20,7 +20,7 @@
 
     @stack('head')
 </head>
-<body class="pt-16">
+<body class="pt-16 bg-violet-500">
     @include('components.layout._navbar')
     <main>
         {{ $slot }}
