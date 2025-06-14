@@ -5,6 +5,6 @@
         <x-sections.services></x-sections.services>
         <x-sections.portfolio></x-sections.portfolio>
        <x-sections.process></x-sections.process>
-        {{-- <x-call-to-action></x-call-to-action> --}}
+        <x-sections.call-to-action></x-sections.x-call-to-action>
     </x-honeycomb-float>
 </x-layout.app>
