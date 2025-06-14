@@ -3,8 +3,8 @@
         <x-hero-section></x-hero-section>
         <x-sections.about></x-sections.about>
         <x-sections.services></x-sections.services>
-        {{-- <x-portfolio :projects="$projects"></x-portfolio>
-        <x-process-section></x-process-section>
+        <x-sections.portfolio></x-sections.portfolio>
+       {{-- <x-process-section></x-process-section>
         <x-call-to-action></x-call-to-action> --}}
     </x-honeycomb-float>
 </x-layout.app>
