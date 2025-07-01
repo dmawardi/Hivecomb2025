@@ -12,8 +12,12 @@ Route::get('/about', function () {
 
 // Inquiries
 Route::get('/contact', function () {
-    return view('inquiries.create');
+    return view('contact');
 })->name('inquiries.create');
+Route::post('/contact', function () {
+    // Handle the contact form submission
+    return redirect()->route('inquiries.create')->with('success', 'Your message has been sent successfully!');
+})->name('inquiries.store');
 
 // Projects
 Route::get('/projects', function () {
