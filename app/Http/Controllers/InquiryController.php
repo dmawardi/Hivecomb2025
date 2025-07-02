@@ -24,8 +24,25 @@ class InquiryController extends Controller
 
     public function store(Request $request)
     {
-        // Logic to handle the contact form submission
-        // Validate and save the inquiry
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email',
+            'phone' => 'nullable|string|max:255',
+            'company_name' => 'nullable|string|max:255',
+            'website' => 'nullable|url|max:255',
+            'type' => 'required|in:general,quote,support,partnership',
+            'message' => 'required|string',
+        ]);
+        
+        // Set the status to unread
+        $request->merge(['status' => 'unread']);
+        // Create a new inquiry
+        $inquiry = Inquiry::create($request->all());
+
+        // Send an email
+        // Mail::to(env('ADMIN_EMAIL'))->queue(new InquiryReceived($inquiry));
+
+
         return redirect()->route('inquiries.create')->with('success', 'Your message has been sent successfully!');
     }
 

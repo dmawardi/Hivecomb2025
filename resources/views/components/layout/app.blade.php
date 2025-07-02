@@ -23,6 +23,7 @@
 <body class="pt-16 bg-violet-500">
     @include('components.layout._navbar')
     <main>
+        @include('components._flash-messages')
         {{ $slot }}
     </main>
     @include('components.layout._footer')
