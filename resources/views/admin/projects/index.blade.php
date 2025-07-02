@@ -39,8 +39,8 @@
                                 </td>
                                 <td class="px-4 py-3 text-gray-500">{{ $project->created_at->format('Y-m-d H:i') }}</td>
                                 <td class="px-4 py-3 flex gap-2">
-                                    <a href="{{ route('projects.edit', $project) }}" class="text-blue-600 hover:underline">Edit</a>
-                                    <form action="{{ route('projects.destroy', $project) }}" method="POST" onsubmit="return confirm('Delete this project?');">
+                                    <a href="{{ route('admin.projects.edit', $project) }}" class="text-blue-600 hover:underline">Edit</a>
+                                    <form action="{{ route('admin.projects.destroy', $project) }}" method="POST" onsubmit="return confirm('Delete this project?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="text-red-600 hover:underline">Delete</button>

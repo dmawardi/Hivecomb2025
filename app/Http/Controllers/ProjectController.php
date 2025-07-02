@@ -24,6 +24,7 @@ class ProjectController extends Controller
         if ($search) {
             $projects = Project::where('name', 'like', '%' . $search . '%')
                 ->orWhere('description', 'like', '%' . $search . '%')
+                ->orWhere('client_name', 'like', '%' . $search . '%')
                 ->orderBy('created_at', 'desc')
                 ->paginate();
         } else {
