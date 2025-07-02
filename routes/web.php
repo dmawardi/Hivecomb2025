@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\InquiryController;
 use App\Http\Controllers\ProjectController;
 use Illuminate\Support\Facades\Route;
@@ -43,3 +44,11 @@ Route::get('/admin/projects/{project}/edit', [ProjectController::class, 'edit'])
 Route::put('/admin/projects/{project}', [ProjectController::class, 'update'])->name('admin.projects.update');
 // Delete a specific project
 Route::delete('/admin/projects/{project}', [ProjectController::class, 'destroy'])->name('admin.projects.destroy');
+
+
+// Profile
+Route::get('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'authenticate'])->name('login.authenticate');
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/profile/edit', [AuthController::class, 'editProfile'])->name('profile.edit');
+Route::put('/profile/update', [AuthController::class, 'updateProfile'])->name('profile.update');

@@ -17,10 +17,5 @@ class DatabaseSeeder extends Seeder
         \App\Models\Project::factory(3)->create();
         // Create 5 inquiries
         \App\Models\Inquiry::factory(5)->create();
-
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
     }
 }
