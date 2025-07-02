@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProjectController extends Controller
 {
@@ -65,5 +66,41 @@ class ProjectController extends Controller
         Project::create($attributes);
 
         return redirect()->route('admin.projects.index')->with('success', 'Project created successfully.');
+    }
+
+    public function edit(Project $project)
+    {
+        return view('admin.projects.edit', compact('project'));
+    }
+
+    public function update(Request $request, Project $project)
+    {
+        $attributes = $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'url' => 'required|url',
+            'client_name' => 'required|string|max:255',
+            'completion_date' => 'required|date',
+            'technologies' => 'required|string',
+            'thumbnail_image' => 'nullable|image',
+            'status' => 'required|in:active,inactive,archived',
+            'featured' => 'required|boolean',
+        ]);
+
+        // If a new thumbnail image is uploaded, store it
+        if ($request->hasFile('thumbnail_image')) {
+            // Delete old image if it exists
+            if(!empty($project->thumbnail_image)) {
+                Storage::disk('public')->delete($project->thumbnail_image);
+            }
+            // Store the new image in the public disk: thumbnails
+            $baseFilePath = $request->file('thumbnail_image')->store('thumbnails', 'public');
+            $attributes['thumbnail_image'] = $baseFilePath;
+        }
+
+        // Update the project
+        $project->update($attributes);
+
+        return redirect()->route('admin.projects.index')->with('success', 'Project updated successfully.');
     }
 }
