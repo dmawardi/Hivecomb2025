@@ -55,7 +55,9 @@ class AuthController extends Controller
      */
     public function editProfile()
     {
-        return view('admin.profile.update');
+        // Grab the authenticated user's data
+        $user = auth()->user();
+        return view('admin.profile.update', compact('user'));
     }
 
     public function updateProfile(Request $request)
@@ -70,6 +72,6 @@ class AuthController extends Controller
         $user = auth()->user();
         $user->update($request->only('name', 'email'));
 
-        return redirect()->back()->with('status', 'Profile updated successfully.');
+        return redirect()->back()->with('success', 'Profile updated successfully.');
     }
 }
