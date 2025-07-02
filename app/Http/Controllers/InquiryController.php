@@ -7,11 +7,24 @@ use Illuminate\Http\Request;
 
 class InquiryController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $inquiries = Inquiry::orderByRaw("CASE WHEN status = 'unread' THEN 0 ELSE 1 END")
-            ->orderBy('created_at', 'desc')
-            ->paginate();
+        // Grab search query if it exists
+        $search = $request->input('search');
+        if ($search) {
+            // Filter inquiries based on search query
+            $inquiries = Inquiry::where('name', 'like', "%{$search}%")
+                ->orWhere('email', 'like', "%{$search}%")
+                ->orWhere('message', 'like', "%{$search}%")
+                ->orderByRaw("CASE WHEN status = 'unread' THEN 0 ELSE 1 END")
+                ->orderBy('created_at', 'desc')
+                ->paginate();
+        } else {
+            // Default to all inquiries
+            $inquiries = Inquiry::orderByRaw("CASE WHEN status = 'unread' THEN 0 ELSE 1 END")
+                ->orderBy('created_at', 'desc')
+                ->paginate();
+        }
 
         return view('inquiries.index', compact('inquiries'));
     }

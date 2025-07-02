@@ -4,6 +4,7 @@
 
         @if($inquiries->count())
             <div class="overflow-x-auto rounded-lg shadow bg-white">
+                <x-_search-bar :route="route('inquiries.index')" />
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-100">
                         <tr>
