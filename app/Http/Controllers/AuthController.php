@@ -33,7 +33,7 @@ class AuthController extends Controller
         // Attempt to log the user in
         if (auth()->attempt($credentials)) {
             // Redirect to intended page or home
-            return redirect()->intended('home');
+            return redirect(route('home'))->with('status', 'You are logged in successfully.');
         }
 
         // If authentication fails, redirect back with an error
