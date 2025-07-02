@@ -103,4 +103,17 @@ class ProjectController extends Controller
 
         return redirect()->route('admin.projects.index')->with('success', 'Project updated successfully.');
     }
+
+    public function destroy(Project $project)
+    {
+        // Delete the thumbnail image if it exists
+        if (!empty($project->thumbnail_image)) {
+            Storage::disk('public')->delete($project->thumbnail_image);
+        }
+
+        // Delete the project
+        $project->delete();
+
+        return redirect()->route('admin.projects.index')->with('success', 'Project deleted successfully.');
+    }
 }
