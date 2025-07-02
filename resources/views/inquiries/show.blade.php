@@ -66,7 +66,8 @@
         </div>
 
         <div class="mt-8 flex justify-between">
-            <a href="{{ route('inquiries.index') }}" class="text-violet-700 hover:underline font-semibold">&larr; Back to Inquiries</a>
+            <a href="{{ route('inquiries.index') }}" class="text-black hover:underline font-semibold">&larr; Back to Inquiries</a>
+            <a href="{{ route('inquiries.edit', $inquiry) }}" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-violet-700 transition">Edit Inquiry</a>
             <form action="{{ route('inquiries.destroy', $inquiry) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this inquiry?');">
                 @csrf
                 @method('DELETE')

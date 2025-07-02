@@ -18,7 +18,6 @@ class InquiryController extends Controller
 
     public function create()
     {
-        // Logic to show the contact form
         return view('inquiries.create');
     }
 
@@ -42,7 +41,6 @@ class InquiryController extends Controller
         // Send an email
         // Mail::to(env('ADMIN_EMAIL'))->queue(new InquiryReceived($inquiry));
 
-
         return redirect()->route('inquiries.create')->with('success', 'Your message has been sent successfully!');
     }
 
@@ -53,15 +51,25 @@ class InquiryController extends Controller
         return view('inquiries.show', compact('inquiry'));
     }
 
-    public function edit($id)
+    public function edit(Inquiry $inquiry)
     {
-        // Logic to show the edit form for an inquiry
-        return view('inquiries.edit', compact('id'));
+        return view('inquiries.edit', compact('inquiry'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Inquiry $inquiry)
     {
-        // Logic to update an inquiry
+        $request->validate([
+            'name' => 'sometimes|required|string|max:255',
+            'email' => 'sometimes|required|email',
+            'phone' => 'nullable|string|max:255',
+            'company_name' => 'nullable|string|max:255',
+            'website' => 'nullable|string|max:255',
+            'type' => 'sometimes|required|in:general,quote,support,partnership',
+            'message' => 'sometimes|required|string',
+            'status' => 'sometimes|in:unread,read,archived,in progress,resolved,closed',
+        ]);
+        $inquiry->update($request->all());
+
         return redirect()->route('inquiries.index')->with('success', 'Inquiry updated successfully!');
     }
 
