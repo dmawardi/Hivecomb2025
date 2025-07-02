@@ -11,10 +11,17 @@
                 <section class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                     @forelse($projects as $project)
                         <div class="bg-gray-800 rounded-lg shadow hover:shadow-lg transition p-6 flex flex-col">
+                            @if($project->thumbnail_image)
+                                <div class="mb-4 flex justify-center">
+                                    <img src="{{ asset('storage/' . $project->thumbnail_image) }}"
+                                        alt="{{ $project->name }} thumbnail"
+                                        class="rounded-md shadow w-full max-w-xs h-32 object-cover bg-gray-900">
+                                </div>
+                            @endif
                             <div class="mb-4">
                                 <h2 class="text-2xl font-semibold text-amber-400 mb-2">
                                     <a href="{{ route('projects.show', $project) }}" class="hover:underline">
-                                        {{ $project->title }}
+                                        {{ $project->name }}
                                     </a>
                                 </h2>
                                 <p class="text-gray-400 text-sm mb-1">
@@ -23,7 +30,7 @@
                                     @endif
                                 </p>
                                 <p class="text-gray-500 text-xs">
-                                    Completed: {{ $project->completed_at ? $project->completed_at->format('F Y') : 'N/A' }}
+                                    Completed: {{ $project->completion_date ? $project->completion_date->format('F Y') : 'N/A' }}
                                 </p>
                             </div>
                             <div class="flex-1">
