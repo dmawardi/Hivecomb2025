@@ -9,7 +9,7 @@
                     <thead class="bg-gray-100">
                         <tr>
                             <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">#</th>
-                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Title</th>
+                            <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
                             <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th>
                             <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
                             <th class="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Created At</th>
@@ -24,7 +24,7 @@
                                         {{ $project->id }}
                                     </a>
                                 </td>
-                                <td class="px-4 py-3 text-gray-700 font-semibold">{{ $project->title }}</td>
+                                <td class="px-4 py-3 text-gray-700 font-semibold">{{ $project->name }}</td>
                                 <td class="px-4 py-3 text-gray-600">{{ $project->client_name ?? '-' }}</td>
                                 <td class="px-4 py-3">
                                     <span class="inline-block px-3 py-1 rounded-full text-xs font-semibold
