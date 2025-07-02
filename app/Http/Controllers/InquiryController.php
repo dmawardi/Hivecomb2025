@@ -2,14 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Inquiry;
 use Illuminate\Http\Request;
 
 class InquiryController extends Controller
 {
     public function index()
     {
-        // Logic to list inquiries
-        return view('inquiries.index');
+        $inquiries = Inquiry::orderByRaw("CASE WHEN status = 'unread' THEN 0 ELSE 1 END")
+            ->orderBy('created_at', 'desc')
+            ->paginate();
+
+        return view('inquiries.index', compact('inquiries'));
     }
 
     public function create()
@@ -25,10 +29,11 @@ class InquiryController extends Controller
         return redirect()->route('inquiries.create')->with('success', 'Your message has been sent successfully!');
     }
 
-    public function show($id)
+    public function show(Inquiry $inquiry)
     {
-        // Logic to show a specific inquiry
-        return view('inquiries.show', compact('id'));
+        $inquiry->status = 'read'; // Mark as read
+        $inquiry->save();
+        return view('inquiries.show', compact('inquiry'));
     }
 
     public function edit($id)
@@ -43,9 +48,9 @@ class InquiryController extends Controller
         return redirect()->route('inquiries.index')->with('success', 'Inquiry updated successfully!');
     }
 
-    public function destroy($id)
+    public function destroy(Inquiry $inquiry)
     {
-        // Logic to delete an inquiry
+        $inquiry->delete();
         return redirect()->route('inquiries.index')->with('success', 'Inquiry deleted successfully!');
     }
 }
