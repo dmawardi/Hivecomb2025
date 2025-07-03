@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\ContactFormSubmitted;
 use App\Models\Inquiry;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class InquiryController extends Controller
 {
@@ -51,8 +54,8 @@ class InquiryController extends Controller
         // Create a new inquiry
         $inquiry = Inquiry::create($request->all());
 
-        // Send an email
-        // Mail::to(env('ADMIN_EMAIL'))->queue(new InquiryReceived($inquiry));
+        // Send an email to admin
+        Mail::to(env('ADMIN_EMAIL'))->queue(new ContactFormSubmitted($inquiry));
 
         return redirect()->route('inquiries.create')->with('success', 'Your message has been sent successfully!');
     }
