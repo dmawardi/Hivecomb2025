@@ -17,12 +17,30 @@
                     <x-navigation.nav-link :href="route('about')" :active="request()->routeIs('about')">
                         {{ __('About') }}
                     </x-navigation.nav-link>
+                    @guest
                     <x-navigation.nav-link :href="route('inquiries.create')" :active="request()->routeIs('inquiries.create')">
                         {{ __('Contact') }}
                     </x-navigation.nav-link>
                     <x-navigation.nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
                         {{ __('Projects') }}
                     </x-navigation.nav-link>
+                    @endguest
+
+                    @auth
+                        <x-navigation.nav-link :href="route('inquiries.index')" :active="request()->routeIs('inquiries.create')">
+                            {{ __('Inquiries') }}
+                        </x-navigation.nav-link>
+                        <x-navigation.nav-link :href="route('admin.projects.index')" :active="request()->routeIs('projects.index')">
+                            {{ __('Projects') }}
+                        </x-navigation.nav-link>
+                        {{-- Logout --}}
+                        <form class="flex align-middle" method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-300 hover:text-white hover:border-gray-300 focus:outline-none transition duration-150 ease-in-out">
+                                {{ __('Logout') }}
+                            </button>
+                        </form>
+                    @endauth
                 </div>
             </div>
 
@@ -49,12 +67,28 @@
             <x-navigation.responsive-nav-link :href="route('about')" :active="request()->routeIs('about')">
                 {{ __('About') }}
             </x-navigation.responsive-nav-link>
+            @guest
             <x-navigation.responsive-nav-link :href="route('inquiries.create')" :active="request()->routeIs('inquiries.create')">
                 {{ __('Contact') }}
             </x-navigation.responsive-nav-link>
             <x-navigation.responsive-nav-link :href="route('projects.index')" :active="request()->routeIs('projects.index')">
                 {{ __('Projects') }}
             </x-navigation.responsive-nav-link>
+            @endguest
+            @auth
+            <x-navigation.responsive-nav-link :href="route('inquiries.index')" :active="request()->routeIs('inquiries.create')">
+                {{ __('Inquiries') }}
+            </x-navigation.responsive-nav-link>
+            <x-navigation.responsive-nav-link :href="route('admin.projects.index')" :active="request()->routeIs('projects.index')">
+                {{ __('Projects') }}
+            </x-navigation.responsive-nav-link>
+            <form class="flex align-middle" method="POST" action="{{ route('logout') }}">
+                @csrf
+                <button type="submit" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium leading-5 text-gray-300 hover:text-white hover:border-gray-300 focus:outline-none transition duration-150 ease-in-out">
+                    {{ __('Logout') }}
+                </button>
+            </form>
+            @endauth
         </div>
     </div>
 

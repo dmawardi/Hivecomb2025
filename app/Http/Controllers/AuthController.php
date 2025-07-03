@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller
 {
@@ -42,10 +45,15 @@ class AuthController extends Controller
         ]);
     }
 
-    public function logout()
+    public function logout(Request $request): RedirectResponse
     {
-        auth()->logout();
-        return redirect()->route('home')->with('status', 'You have been logged out successfully.');
+        Auth::guard('web')->logout();
+
+        $request->session()->invalidate();
+
+        $request->session()->regenerateToken();
+
+        return redirect('/');
     }
 
     /**
