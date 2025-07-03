@@ -1,4 +1,4 @@
-<x-layout.app :title="$project->name">
+<x-layout.app :title="$project->name . ' | Portfolio Project | HiveComb'" :description="Str::limit(strip_tags($project->description), 155)">>
     <x-honeycomb-float>
         <div class="w-10/12 md:w-2/3 mx-auto relative z-40 bg-gray-700 rounded-md shadow-lg my-10">
             <div class="container mx-auto px-4 py-8 mt-6">
