@@ -29,6 +29,9 @@ You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you
 
 If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
 
+# Deployment
+When deploying, you will need to setup the .env file and make sure you complete the below steps in order to create a user that will be the admin
+
 ## Creating a User
 ```bash
 php artisan create:user someone@example.com --password=supersecret
