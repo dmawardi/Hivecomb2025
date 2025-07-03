@@ -20,6 +20,17 @@
 
     @stack('head')
 </head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P97BQRT26F"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-P97BQRT26F');
+</script>
+
 <body class="pt-16 bg-violet-500">
     @include('components.layout._navbar')
     <main>
