@@ -55,7 +55,7 @@ class InquiryController extends Controller
         $inquiry = Inquiry::create($request->all());
 
         // Send an email to admin
-        Mail::to(env('ADMIN_EMAIL'))->queue(new ContactFormSubmitted($inquiry));
+        Mail::to(config('app.admin_email'))->queue(new ContactFormSubmitted($inquiry));
 
         return redirect()->route('inquiries.create')->with('success', 'Your message has been sent successfully!');
     }
